@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "title": "Brown Patagonia Jacket",
+      "company": {
+        "name": "Beckett Carlton",
+        "contactEmail": "beckett.m.carlton@gmail.com",
+        "contactPhone": "555-555-5555"
+      },
+      "id": "2"
+    },
+    {
+      "id": "3",
+      "title": "Colorado Rockies Baseball Cap",
+      "company": {
+        "name": "Gavin Burke",
+        "contactEmail": "gburke@d51schools.org",
+        "contactPhone": "555-555-5555"
+      }
+    },
+    {
+      "id": "3329",
+      "title": "Black Adidas Metal Waterbottle",
+      "company": {
+        "name": "Leo Zhu",
+        "contactEmail": "tzhu@d51schools.org",
+        "contactPhone": "970-753-9225"
+      }
+    },
+    {
+      "title": "running shoes",
+      "company": {
+        "name": "Jace Carter",
+        "contactEmail": "carterjace777@gmail.com",
+        "contactPhone": "970-783-1385"
+      },
+      "id": "f94c"
+    }
+  ]
+}

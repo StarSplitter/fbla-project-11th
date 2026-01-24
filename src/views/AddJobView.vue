@@ -1,0 +1,162 @@
+<script setup>
+import router from '@/router';
+import { reactive, ref } from 'vue';
+import { useToast } from 'vue-toastification';
+import axios from 'axios';
+
+const imageBase64 = ref(null);
+const imagePreview = ref(null);
+
+const form = reactive({
+  title: '',
+  company: {
+    name: '',
+    description: '',
+    contactEmail: '',
+    contactPhone: '',
+  },
+  image: '',
+});
+
+const toast = useToast();
+
+const handleImage = (e) => {
+  const file = e.target.files[0];
+  if (!file){
+    return;
+  };
+
+  if (file.size > 2 * 1024 * 1024) {
+    alert('Image must be under 2MB');
+    return;
+  };
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    imageBase64.value = reader.result;
+    imagePreview.value = reader.result;
+  };
+  reader.readAsDataURL(file);
+};
+
+const handleSubmit = async () => {
+  const newJob = {
+    title: form.title,
+    company: {
+      name: form.company.name,
+      contactEmail: form.company.contactEmail,
+      contactPhone: form.company.contactPhone,
+    },
+    image: imageBase64.value,
+  };
+
+  try {
+    const response = await axios.post('/api/items', newJob);
+    toast.success('Item Added Successfully');
+    router.push(`/items/${response.data.id}`);
+  } catch (error) {
+    console.error('Error fetching item', error);
+    toast.error('Item Was Not Added');
+  }
+};
+</script>
+
+<template>
+  <section class="bg-stone-50">
+    <div class="container m-auto max-w-2xl py-24">
+      <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
+        <form @submit.prevent="handleSubmit">
+          <h2 class="text-3xl text-center font-semibold mb-6">Report Item</h2>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2">
+              Item Name
+            </label>
+            <input
+              type="text"
+              v-model="form.title"
+              id="name"
+              name="name"
+              class="border rounded w-full py-2 px-3 mb-2"
+              placeholder="eg. Black Adidas Metal Waterbottle"
+              required
+            />
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2">
+              Item Image
+            </label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              class="border rounded w-full py-2 px-3 mb-2"
+              accept="image/*"
+              @change="handleImage"
+              required
+            />
+             <img v-if="imagePreview" :src="imagePreview" width="200" />
+          </div>
+
+          <h3 class="text-2xl mb-5">Finder Info</h3>
+
+          <div class="mb-4">
+            <label for="company" class="block text-gray-700 font-bold mb-2">
+              Finder's Name
+            </label>
+            <input
+              type="text"
+              v-model="form.company.name"
+              id="company"
+              name="company"
+              class="border rounded w-full py-2 px-3"
+              placeholder="Your Name"
+            />
+          </div>
+
+          <div class="mb-4">
+            <label
+              for="contact_email"
+              class="block text-gray-700 font-bold mb-2"
+              >Finder's Email</label
+            >
+            <input
+              type="email"
+              v-model="form.company.contactEmail"
+              id="contact_email"
+              name="contact_email"
+              class="border rounded w-full py-2 px-3"
+              placeholder="Your Email address"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              for="contact_phone"
+              class="block text-gray-700 font-bold mb-2"
+              >Finder's Phone</label
+            >
+            <input
+              type="tel"
+              v-model="form.company.contactPhone"
+              id="contact_phone"
+              name="contact_phone"
+              class="border rounded w-full py-2 px-3"
+              placeholder="Your Phone Number"
+            />
+          </div>
+
+          <div>
+            <button
+              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Add Item
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</template>
