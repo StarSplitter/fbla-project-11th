@@ -5,13 +5,14 @@ import InquiryForm from '@/components/InquiryForm.vue';
 import { reactive, onMounted } from 'vue';
 import { useRoute, RouterLink, useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
-import axios from 'axios';
+import { supabase } from '@/lib/supabase';
 
 const route = useRoute();
 const router = useRouter();
 const toast = useToast();
 
 const jobId = route.params.id;
+
 
 const state = reactive({ 
   job: {},
@@ -22,7 +23,8 @@ const deleteJob = async () => {
   try {
     const confirm = window.confirm('Are you sure you want to delete this job?');
     if (confirm) {
-      await axios.delete(`/api/items/${jobId}`);
+      const {error} = await supabase.from('items').delete().eq('id', jobId);
+      //await axios.delete(`/api/items/${jobId}`);
       toast.success('Item Deleted Successfully');
       router.push('/items');
     }
@@ -34,10 +36,13 @@ const deleteJob = async () => {
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`/api/items/${jobId}`);
-    state.job = response.data;
+    //const response = await axios.get(`/api/items/${jobId}`);
+    const { data, error } = await supabase.from('items').select('*').eq('id', jobId).single();
+    if (error) throw error;
+    state.job = data;
+
   } catch (error) {
-    console.error('Error fetching item', error);
+    console.error('Error fetching item', error.message);
   } finally {
     state.isLoading = false;
   }
@@ -52,7 +57,7 @@ onMounted(async () => {
         <main>
           <div class="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
             <h1 class="text-3xl font-bold mb-4">{{ state.job.title }}</h1>
-            <img alt=state.job.title :src="state.job.image" width="200" />
+            <img alt=state.job.title :src="state.job.image_url" width="200" />
           </div>
           <InquiryForm :item="state.job"/>
         </main>
@@ -63,20 +68,20 @@ onMounted(async () => {
           <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-bold mb-6">Finder Info</h3>
 
-            <h2 class="text-2xl">{{ state.job.company.name }}</h2>
+            <h2 class="text-2xl">{{ state.job.finder_name }}</h2>
 
             <hr class="my-4" />
 
             <h3 class="text-xl">Finder's Email:</h3>
 
             <p class="my-2 bg-green-100 p-2 font-bold">
-              {{ state.job.company.contactEmail }}
+              {{ state.job.contact_email }}
             </p>
 
             <h3 class="text-xl">Finder's Phone:</h3>
 
             <p class="my-2 bg-green-100 p-2 font-bold">
-              {{ state.job.company.contactPhone }}
+              {{ state.job.contact_phone }}
             </p>
           </div>
 

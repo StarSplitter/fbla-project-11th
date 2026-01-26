@@ -11,8 +11,8 @@ const toast = useToast();
 
 const formData = reactive({
   name: '',
-  ContactName: props.item.company.name,
-  email: props.item.company.contactEmail,
+  ContactName: props.item.finder_name,
+  email: props.item.contact_email,
   message: ''
 });
 
@@ -21,7 +21,7 @@ const sendEmail = () => {
     'template_173xft8', 
     {
         name: formData.name,
-        ContactName: props.item.company.name,
+        ContactName: props.item.finder_name,
         recipient: formData.email,
         message: formData.message
     },

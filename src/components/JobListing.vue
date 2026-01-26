@@ -13,14 +13,14 @@ const props = defineProps({
     <div class="p-4">
       <div class="mb-6">
         <h3 class="text-xl font-bold">{{ job.title }}</h3>
-        <img :alt="job.title.toUpperCase()" :src="job.image" width="200" />
+        <img :alt="job.title.toUpperCase()" :src="job.image_url" width="200" />
       </div>
 
       <div class="border border-gray-100 mb-5"></div>
 
       <div class="flex flex-col lg:flex-row justify-between mb-4">
         <div class="text-black-700 mb-3">
-          {{ job.company.name }}
+          {{ job.finder_name }}
         </div>
         <RouterLink
           :to="'/items/' + job.id"

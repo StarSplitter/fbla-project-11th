@@ -3,15 +3,15 @@ import router from '@/router';
 import { reactive, ref } from 'vue';
 import { useToast } from 'vue-toastification';
 import axios from 'axios';
+import { supabase } from '@/lib/supabase';
 
-const imageBase64 = ref(null);
+const imageFile = ref(null);
 const imagePreview = ref(null);
 
 const form = reactive({
   title: '',
   company: {
     name: '',
-    description: '',
     contactEmail: '',
     contactPhone: '',
   },
@@ -31,15 +31,12 @@ const handleImage = (e) => {
     return;
   };
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    imageBase64.value = reader.result;
-    imagePreview.value = reader.result;
-  };
-  reader.readAsDataURL(file);
+  imageFile.value = file;
+  imagePreview.value = URL.createObjectURL(file);
 };
 
 const handleSubmit = async () => {
+  /*
   const newJob = {
     title: form.title,
     company: {
@@ -49,11 +46,37 @@ const handleSubmit = async () => {
     },
     image: imageBase64.value,
   };
-
+  */
   try {
-    const response = await axios.post('/api/items', newJob);
+    //const response = await axios.post('/api/items', newJob);
+    const filePath = `items/${crypto.randomUUID()}`;
+    const { error: uploadError } = await supabase.storage.from('images').upload(filePath, imageFile.value);
+    if (uploadError){
+      throw uploadError;
+    }
+
+    const { data: urlData } = supabase.storage.from('images').getPublicUrl(filePath);
+
+    const imageUrl = urlData.publicUrl;
+
+    const { data, error: insertError } = await supabase
+      .from('items')
+      .insert({
+        title: form.title,
+        image_url: imageUrl,
+        finder_name: form.company.name,
+        contact_email: form.company.contactEmail,
+        contact_phone: form.company.contactPhone,
+      })
+      .select()
+      .single();
+
+    if (insertError){
+      throw insertError;
+    };
+
     toast.success('Item Added Successfully');
-    router.push(`/items/${response.data.id}`);
+    router.push(`/items/${data.id}`);
   } catch (error) {
     console.error('Error fetching item', error);
     toast.error('Item Was Not Added');

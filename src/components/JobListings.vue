@@ -4,7 +4,7 @@
 import { RouterLink } from 'vue-router';
 import { reactive, defineProps, onMounted } from 'vue';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
-import axios from 'axios';
+import { supabase } from '@/lib/supabase';
 
 defineProps({
   limit: Number,
@@ -21,10 +21,12 @@ const state = reactive({
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:8000/items');
-    state.jobs = response.data;
+    const { data, error } = await supabase.from('items').select('*').order('created_at', {ascending: false});
+    if (error) throw error;
+    state.jobs = data;
+
   } catch (error) {
-    console.error('Error fetching items', error);
+    console.error('Error fetching item', error.message);
   } finally {
     state.isLoading = false;
   }
