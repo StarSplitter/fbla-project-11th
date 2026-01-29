@@ -2,7 +2,7 @@
   import JobListing from './JobListing.vue';
 
 import { RouterLink } from 'vue-router';
-import { reactive, defineProps, onMounted } from 'vue';
+import { reactive, defineProps, onMounted, onUnmounted } from 'vue';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import { supabase } from '@/lib/supabase';
 
@@ -19,17 +19,32 @@ const state = reactive({
   isLoading: true,
 });
 
-onMounted(async () => {
+const fetchJobs = async () => {
   try {
+    state.isLoading = true;
     const { data, error } = await supabase.from('items').select('*').order('created_at', {ascending: false});
     if (error) throw error;
     state.jobs = data;
-
   } catch (error) {
     console.error('Error fetching item', error.message);
   } finally {
     state.isLoading = false;
-  }
+  };
+};
+onMounted(async () => {
+  fetchJobs();
+
+  const focusChange = () => {
+    if (!document.hidden) {
+      fetchJobs();
+    };
+  };
+
+  document.addEventListener("visibilitychange", focusChange);
+
+  onUnmounted(() => {
+    document.removeEventListener('visibilitychange', focusChange);
+  });
 });
 </script>
 

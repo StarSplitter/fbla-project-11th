@@ -6,6 +6,7 @@ const isActiveLink = (routePath) => {
   const route = useRoute();
   return route.path === routePath;
 };
+
 </script>
 
 <template>
@@ -35,9 +36,10 @@ const isActiveLink = (routePath) => {
                   'py-2',
                   'rounded-md',
                   'font-uniongothic',
-                ]"
-                >Home</RouterLink
-              >
+                ]">
+                Home
+              </RouterLink>
+
               <RouterLink
                 to="/items"
                 :class="[
@@ -49,9 +51,10 @@ const isActiveLink = (routePath) => {
                   'py-2',
                   'rounded-md',
                   'font-uniongothic',
-                ]"
-                >Items</RouterLink
-              >
+                ]">
+                Items
+              </RouterLink>
+
               <RouterLink
                 to="/items/add"
                 :class="[
@@ -63,9 +66,39 @@ const isActiveLink = (routePath) => {
                   'py-2',
                   'rounded-md',
                   'font-sans',
-                ]"
-                >Add Item</RouterLink
-              >
+                ]">
+                Add Item
+              </RouterLink>
+
+              <RouterLink
+                to="/signup"
+                :class="[
+                  isActiveLink('/signup')
+                    ? 'bg-[#702632]'
+                    : 'hover:bg-gray-900 hover:text-white',
+                  'text-white',
+                  'px-3',
+                  'py-2',
+                  'rounded-md',
+                  'font-sans',
+                ]">
+                Sign Up
+              </RouterLink>
+
+              <RouterLink
+                to="/login"
+                :class="[
+                  isActiveLink('/login')
+                    ? 'bg-[#702632]'
+                    : 'hover:bg-gray-900 hover:text-white',
+                  'text-white',
+                  'px-3',
+                  'py-2',
+                  'rounded-md',
+                  'font-sans',
+                ]">
+                Log In
+                </RouterLink>
             </div>
           </div>
         </div>

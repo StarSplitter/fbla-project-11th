@@ -1,12 +1,14 @@
 <script setup>
 import router from '@/router';
-import { reactive, ref } from 'vue';
+import { reactive, ref, inject, onMounted } from 'vue';
 import { useToast } from 'vue-toastification';
-import axios from 'axios';
 import { supabase } from '@/lib/supabase';
 
 const imageFile = ref(null);
 const imagePreview = ref(null);
+
+const auth = inject('auth');
+
 
 const form = reactive({
   title: '',
@@ -19,6 +21,7 @@ const form = reactive({
 });
 
 const toast = useToast();
+
 
 const handleImage = (e) => {
   const file = e.target.files[0];
@@ -36,19 +39,8 @@ const handleImage = (e) => {
 };
 
 const handleSubmit = async () => {
-  /*
-  const newJob = {
-    title: form.title,
-    company: {
-      name: form.company.name,
-      contactEmail: form.company.contactEmail,
-      contactPhone: form.company.contactPhone,
-    },
-    image: imageBase64.value,
-  };
-  */
   try {
-    //const response = await axios.post('/api/items', newJob);
+    
     const filePath = `items/${crypto.randomUUID()}`;
     const { error: uploadError } = await supabase.storage.from('images').upload(filePath, imageFile.value);
     if (uploadError){
@@ -67,6 +59,7 @@ const handleSubmit = async () => {
         finder_name: form.company.name,
         contact_email: form.company.contactEmail,
         contact_phone: form.company.contactPhone,
+        user_id: auth.user.id,
       })
       .select()
       .single();
@@ -82,6 +75,13 @@ const handleSubmit = async () => {
     toast.error('Item Was Not Added');
   }
 };
+
+onMounted(() => {
+  if (!auth.user && !auth.isLoading) {
+    toast.error('Please log in to add an item');
+    router.push('/login');
+  };
+});
 </script>
 
 <template>

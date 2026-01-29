@@ -26,7 +26,6 @@ const state = reactive({
 
 const handleSubmit = async () => {
   try {
-    //const response = await axios.put(`/api/items/${jobId}`, updatedJob);
     const { error } = await supabase
       .from('items')
       .update({
@@ -45,7 +44,7 @@ const handleSubmit = async () => {
     router.push(`/items/${jobId}`);
   } catch (error) {
     console.error('Error fetching item', error);
-    toast.error('Item Was Not Added');
+    toast.error('Item Was Not Updated');
   }
 };
 

@@ -2,7 +2,7 @@
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import BackButton from '@/components/BackButton.vue';
 import InquiryForm from '@/components/InquiryForm.vue';
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, computed, inject } from 'vue';
 import { useRoute, RouterLink, useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
 import { supabase } from '@/lib/supabase';
@@ -13,18 +13,29 @@ const toast = useToast();
 
 const jobId = route.params.id;
 
+const auth = inject('auth');
 
 const state = reactive({ 
   job: {},
   isLoading: true,
+  currentUser: null,
+  isAdmin: false,
 });
+
+const canManageItem = computed(() => {
+  if (!auth.user) {
+    return false;
+  }
+  // User can manage if they own the item OR they are an admin
+  return (state.job.user_id === auth.user.id) || (auth.isAdmin);
+});
+
 
 const deleteJob = async () => {
   try {
     const confirm = window.confirm('Are you sure you want to delete this job?');
     if (confirm) {
       const {error} = await supabase.from('items').delete().eq('id', jobId);
-      //await axios.delete(`/api/items/${jobId}`);
       toast.success('Item Deleted Successfully');
       router.push('/items');
     }
@@ -36,7 +47,6 @@ const deleteJob = async () => {
 
 onMounted(async () => {
   try {
-    //const response = await axios.get(`/api/items/${jobId}`);
     const { data, error } = await supabase.from('items').select('*').eq('id', jobId).single();
     if (error) throw error;
     state.job = data;
@@ -85,8 +95,7 @@ onMounted(async () => {
             </p>
           </div>
 
-          <!-- Manage -->
-          <div class="bg-white p-6 rounded-lg shadow-md mt-6">
+          <div v-if="canManageItem" class="bg-white p-6 rounded-lg shadow-md mt-6">
             <h3 class="text-xl font-bold mb-6">Manage Item</h3>
             <RouterLink
               :to="`/items/edit/${state.job.id}`"
