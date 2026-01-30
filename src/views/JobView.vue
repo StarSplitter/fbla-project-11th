@@ -33,11 +33,12 @@ const canManageItem = computed(() => {
 
 const deleteJob = async () => {
   try {
-    const confirm = window.confirm('Are you sure you want to delete this job?');
+    const confirm = window.confirm('Are you sure you want to delete this item?');
     if (confirm) {
       const {error} = await supabase.from('items').delete().eq('id', jobId);
       toast.success('Item Deleted Successfully');
       router.push('/items');
+      if (error) throw error;
     }
   } catch (error) {
     console.error('Error deleting job', error);

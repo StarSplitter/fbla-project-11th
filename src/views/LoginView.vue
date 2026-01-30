@@ -12,9 +12,15 @@ const toast = useToast();
 const handleLogin = async () => {
   try {
     const { data, error } = await supabase.auth.signInWithPassword({
-        email: email.value,
-        password: password.value
+        email: loginEmail.value,
+        password: loginPassword.value,
     });
+
+    if (error) {
+      console.error('Login error:', error);
+      toast.error('Invalid email or password');
+      return;
+    };
 
     toast.success('Successfully Logged In!');
     router.push('/');
@@ -25,21 +31,6 @@ const handleLogin = async () => {
   };
 };
 
-const handleLogOut = async () => {
-  try {
-    const { error } = await supabase.auth.signOut();
-
-    if (error) throw error;
-    toast.success('Succesfully Logged Out');
-    router.push('/');
-
-  } catch (error) {
-
-    console.error('Error Logging Out', error);
-    toast.error('Error Logging Out');
-
-  }
-};
 </script>
 
 <template>
@@ -84,16 +75,6 @@ const handleLogOut = async () => {
               type="submit"
             >
               Log In
-            </button>
-          </div>
-        </form>
-        <form @submit.prevent="handleLogOut">
-          <div class="my-8">
-            <button
-              class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Log Out
             </button>
           </div>
         </form>

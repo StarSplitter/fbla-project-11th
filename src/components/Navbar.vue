@@ -69,36 +69,6 @@ const isActiveLink = (routePath) => {
                 ]">
                 Add Item
               </RouterLink>
-
-              <RouterLink
-                to="/signup"
-                :class="[
-                  isActiveLink('/signup')
-                    ? 'bg-[#702632]'
-                    : 'hover:bg-gray-900 hover:text-white',
-                  'text-white',
-                  'px-3',
-                  'py-2',
-                  'rounded-md',
-                  'font-sans',
-                ]">
-                Sign Up
-              </RouterLink>
-
-              <RouterLink
-                to="/login"
-                :class="[
-                  isActiveLink('/login')
-                    ? 'bg-[#702632]'
-                    : 'hover:bg-gray-900 hover:text-white',
-                  'text-white',
-                  'px-3',
-                  'py-2',
-                  'rounded-md',
-                  'font-sans',
-                ]">
-                Log In
-                </RouterLink>
             </div>
           </div>
         </div>

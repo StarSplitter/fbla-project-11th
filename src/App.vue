@@ -1,5 +1,6 @@
 <script setup>
 import Navbar from '@/components/Navbar.vue';
+import StatusBar from './components/StatusBar.vue';
 import { RouterView } from 'vue-router';
 import { reactive, onMounted, provide } from 'vue';
 import { supabase } from './lib/supabase';
@@ -35,13 +36,14 @@ onMounted(async() => {
   auth.isLoading = false;
   console.log('App.vue: Final auth object:', auth);
   
-  supabase.auth.onAuthStateChange(async (event, session) => {
-    auth.user = session?.user ?? null;
+  supabase.auth.onAuthStateChange((event, session) => {
+    console.log('Auth state changed:', event);
     
-    if (auth.user) {
-      const { data: { user } } = await supabase.auth.getUser();
-      auth.isAdmin = user?.app_metadata?.role === 'admin';
+    if (session?.user) {
+      auth.user = session.user; 
+      auth.isAdmin = session.user.app_metadata?.role === 'admin';
     } else {
+      auth.user = null;
       auth.isAdmin = false;
     }
   });
@@ -50,6 +52,7 @@ onMounted(async() => {
 </script>
 
 <template>
+  <StatusBar />
   <Navbar />
   <RouterView />
 </template>

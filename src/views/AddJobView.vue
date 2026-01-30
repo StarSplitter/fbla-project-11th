@@ -77,7 +77,7 @@ const handleSubmit = async () => {
 };
 
 onMounted(() => {
-  if (!auth.user && !auth.isLoading) {
+  if (!auth.user) {
     toast.error('Please log in to add an item');
     router.push('/login');
   };
