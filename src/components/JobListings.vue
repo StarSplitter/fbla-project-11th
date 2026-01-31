@@ -1,9 +1,11 @@
 <script setup>
-  import JobListing from './JobListing.vue';
-  import { RouterLink } from 'vue-router';
-  import { reactive, defineProps, onMounted, onUnmounted, watch, ref } from 'vue';
-  import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
-  import { supabase } from '@/lib/supabase';
+
+import JobListing from './JobListing.vue';
+import { RouterLink } from 'vue-router';
+import { reactive, defineProps, onMounted, onUnmounted, watch, ref } from 'vue';
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import { supabase } from '@/lib/supabase';
+import { useQuery } from '@tanstack/vue-query';
 
 defineProps({
   limit: Number,
