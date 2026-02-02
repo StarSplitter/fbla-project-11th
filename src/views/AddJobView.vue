@@ -1,4 +1,5 @@
 <script setup>
+// IMPORTS
 import router from '@/router';
 import { reactive, ref, inject, onMounted } from 'vue';
 import { useToast } from 'vue-toastification';
@@ -9,7 +10,7 @@ const imagePreview = ref(null);
 
 const auth = inject('auth');
 
-
+// Form Data
 const form = reactive({
   title: '',
   company: {
@@ -22,7 +23,7 @@ const form = reactive({
 
 const toast = useToast();
 
-
+// Handles image file selection and preview
 const handleImage = (e) => {
   const file = e.target.files[0];
   if (!file){
@@ -38,19 +39,27 @@ const handleImage = (e) => {
   imagePreview.value = URL.createObjectURL(file);
 };
 
+/*
+  Handles form submission
+  Uploads image to storage and creates item in database
+*/
 const handleSubmit = async () => {
   try {
     
+    // Uploads image to storage and checks for an upload error
     const filePath = `items/${crypto.randomUUID()}`;
     const { error: uploadError } = await supabase.storage.from('images').upload(filePath, imageFile.value);
+    
     if (uploadError){
       throw uploadError;
     }
 
+    // Get an URL for the image
     const { data: urlData } = supabase.storage.from('images').getPublicUrl(filePath);
 
     const imageUrl = urlData.publicUrl;
 
+    // Create the item in the database
     const { data, error: insertError } = await supabase
       .from('items')
       .insert({
@@ -68,8 +77,10 @@ const handleSubmit = async () => {
       throw insertError;
     };
 
+    // Show success message and redirect to home page
     toast.success('Item Added Successfully');
     router.push(`/items/${data.id}`);
+
   } catch (error) {
     console.error('Error fetching item', error);
     toast.error('Item Was Not Added');
