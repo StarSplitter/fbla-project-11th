@@ -30,11 +30,6 @@ const handleImage = (e) => {
     return;
   };
 
-  if (file.size > 2 * 1024 * 1024) {
-    alert('Image must be under 2MB');
-    return;
-  };
-
   imageFile.value = file;
   imagePreview.value = URL.createObjectURL(file);
 };

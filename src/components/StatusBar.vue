@@ -37,7 +37,7 @@ const handleLogOut = async () => {
   <div v-if="auth.user" class="bg-green-100 border-b border-green-200 px-4 py-2">
     <div class="container mx-auto flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <span class="text-green-800 font-semibold">Logged in as:</span>
+        <span class="text-green-800 font-semibold">✓ Logged in as:</span>
         <span class="text-green-900">{{ auth.user.email }}</span>
         <span v-if="auth.isAdmin" class="bg-green-600 text-white text-xs px-2 py-1 rounded">
           ADMIN
@@ -54,7 +54,7 @@ const handleLogOut = async () => {
   
   <div v-else class="bg-yellow-100 border-b border-yellow-200 px-4 py-2">
     <div class="container mx-auto flex items-center justify-between">
-      <span class="text-yellow-800 font-semibold">Not logged in</span>
+      <span class="text-yellow-800 font-semibold">⚠ Not logged in</span>
       <div class="flex gap-3">
         <RouterLink
             to="/signup"
