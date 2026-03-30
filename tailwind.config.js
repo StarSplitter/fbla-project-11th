@@ -6,7 +6,10 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         boheld: ['Boheld', 'serif'],
-        uniongothic: ['Inter', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+        caudex: ['Caudex', 'serif'],
+        caudexbold: ['CaudexBold', 'serif'],
+        poppins: ['Poppins', 'sans-serif'],
       },
       gridTemplateColumns: {
         '70/30': '70% 28%',

@@ -97,10 +97,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-sky-50">
-  <section class="bg-sky-50 px-4 py-10">
+  <div class="bg-stone-100">
+  <section class="bg-stone-100 px-4 py-10">
     <div class="container-xl lg:container m-auto">
-      <h2 class="text-3xl font-bold text-black-500 mb-6 text-center">
+      <h2 class="text-4xl font-caudex font-bold text-stone-800 mb-6 text-center">
         Browse Items
       </h2>
       <div v-if="(state.isLoading)" class="text-center text-gray-500 py-6">

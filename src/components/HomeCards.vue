@@ -5,23 +5,23 @@ import Card from '@/components/Card.vue';
 
 <template>
   <!--bg-[linear-gradient(315deg,rgba(145,47,64,0.75)_0%,theme(colors.zinc.400)_100%)]-->
-  <section class="bg-sky-50 py-4">
+  <section class="bg-stone-100 py-4">
     <div class="container-xl lg:container m-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
-        <Card>
-          <h2 class="text-2xl font-uniongothic">Search Items</h2>
+        <Card bg="bg-white">
+          <h2 class="text-2xl font-poppins">Search Items</h2>
           <p class="mt-2 mb-4">
             Search for all lost belongings reported found
           </p>
           <RouterLink
             to="/items"
-            class="inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-700 font-uniongothic">
+            class="inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-stone-600 font-uniongothic">
             Search Items
           </RouterLink>
         </Card>
         <Card bg="bg-purple-100">
-          <h2 class="text-2xl font-Inter">Report Item</h2>
-          <p class="mt-2 mb-4 font-Inter">
+          <h2 class="text-2xl font-poppins">Report Item</h2>
+          <p class="mt-2 mb-4 font-inter">
             Report a found item through a submission form
           </p>
           <RouterLink

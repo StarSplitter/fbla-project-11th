@@ -1,6 +1,9 @@
 <script setup>
 import { RouterLink, useRoute } from 'vue-router';
 import logo from '@/assets/img/palisade.webp';
+import { useI18n } from 'vue-i18n';
+
+const { t, locale } = useI18n();
 
 const isActiveLink = (routePath) => {
   const route = useRoute();
@@ -10,7 +13,7 @@ const isActiveLink = (routePath) => {
 </script>
 
 <template>
-  <nav class="bg-[linear-gradient(315deg,rgba(145,47,64,0.75)_0%,rgba(64,67,78,0.75)_100%)]">
+  <nav class="bg-[#660014] border-rose-950 border-b sticky">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="flex h-20 items-center justify-between">
         <div
@@ -19,7 +22,7 @@ const isActiveLink = (routePath) => {
           <!-- Logo -->
           <RouterLink class="flex flex-shrink-0 items-center mr-4" to="/">
             <img class="h-14 w-auto" :src="logo" alt="PaliFind" />
-            <span class="hidden md:block text-white text-2xl font-boheld ml-2">
+            <span class="hidden md:block text-white text-2xl font-caudexbold ml-2">
               PALIFOUND
             </span>
           </RouterLink>
@@ -37,7 +40,7 @@ const isActiveLink = (routePath) => {
                   'rounded-md',
                   'font-uniongothic',
                 ]">
-                Home
+                {{ $t('nav.home') }}
               </RouterLink>
 
               <RouterLink
@@ -52,7 +55,7 @@ const isActiveLink = (routePath) => {
                   'rounded-md',
                   'font-uniongothic',
                 ]">
-                Items
+                {{ $t('nav.items') }}
               </RouterLink>
 
               <RouterLink
@@ -67,8 +70,27 @@ const isActiveLink = (routePath) => {
                   'rounded-md',
                   'font-sans',
                 ]">
-                Add Item
+                {{$t('nav.addItem')}}
               </RouterLink>
+
+              <div class="flex space-x-1 ml-4">
+                <button
+                  @click="locale = 'en'"
+                  :class="[
+                    locale === 'en' ? 'bg-[#702632]' : 'hover:bg-gray-900',
+                    'text-white', 'px-2', 'py-1', 'rounded-md', 'text-sm', 'font-sans'
+                  ]">
+                  EN
+                </button>
+                <button
+                  @click="locale = 'es'"
+                  :class="[
+                    locale === 'es' ? 'bg-[#702632]' : 'hover:bg-gray-900',
+                    'text-white', 'px-2', 'py-1', 'rounded-md', 'text-sm', 'font-sans'
+                  ]">
+                  ES
+                </button>
+              </div>
             </div>
           </div>
         </div>

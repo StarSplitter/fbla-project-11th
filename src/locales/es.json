@@ -1,0 +1,11 @@
+{
+  "hero": {
+    "title": "Encuentra rápidamente los objetos perdidos",
+    "subtitle": "Notifica y reclama objetos perdidos en Palisade con PaliFound"
+  },
+  "nav": {
+    "home": "Inicio",
+    "items": "Artículos",
+    "addItem": "Agregar Artículo"
+  }
+}

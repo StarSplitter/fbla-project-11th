@@ -1,0 +1,11 @@
+{
+  "hero": {
+    "title": "Find Lost Items Fast",
+    "subtitle": "Report & Claim Lost Items at Palisade with PaliFound"
+  },
+  "nav": {
+    "home": "Home",
+    "items": "Items",
+    "addItem": "Add Item"
+  }
+}
