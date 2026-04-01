@@ -7,5 +7,77 @@
     "home": "Home",
     "items": "Items",
     "addItem": "Add Item"
+  },
+  "homecards": {
+    "title": "Search Items",
+    "subtitle": "Search for all lost belongings reported found",
+    "title2": "Report Item",
+    "subtitle2": "Report a found item through a submission form"
+  },
+  "statusbar": {
+    "logout": "Log Out",
+    "logged": "✓ Logged in as: ",
+    "login": "Log In",
+    "signup": "Sign Up",
+    "notlogged": "⚠ Not logged in"
+  },
+  "joblistings": {
+    "browse": "Browse Items",
+    "view": "View All Items"
+  },
+  "backbutton":{
+    "back": "Back to Item Listings"
+  },
+  "joblisting": {
+    "readmore": "Read More"
+  },
+  "signup":{
+    "signup": "Sign Up",
+    "email": "Email Address",
+    "login": "Log In",
+    "password": "Password"
+  },
+  "inquiry": {
+    "name": "Name",
+    "message": "Message",
+    "sendform": "Send Form"
+  },
+  "jobinfo": {
+    "jobinfo": "Finder Info",
+    "email": "Finder's Email:",
+    "phone": "Finder's Phone:",
+    "manageitem": "Manage Item",
+    "edititem": "Edit Item",
+    "deleteitem": "Delete Item"
+  },
+  "toast":{
+    "form":{
+      "success": "Form Sent Successfully",
+      "error": "Error submitting form"
+    },
+    "account":{
+      "signup": "Successfully Signed Up!",
+      "signuperror": "Error Signing Up",
+      "login": "Successfully Logged In!",
+      "loginerror": "Invalid email or password",
+      "logincatch": "Error Logging In"
+    },
+    "addjob":{
+      "success": "Item Added Successfully",
+      "error": "Error fetching item",
+      "please": "Please log in to add an item"
+    },
+    "editjob":{
+      "success": "Item Updated Successfully",
+      "error": "Error fetching item"
+    },
+    "deletejob":{
+      "success": "Item Deleted Successfully",
+      "error": "Error deleting job"
+    },
+    "logout":{
+      "success": "Successfully Logged Out",
+      "error": "Error Logging Out"
+    }
   }
 }

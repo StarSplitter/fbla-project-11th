@@ -4,6 +4,9 @@ import router from '@/router';
 import { reactive, ref, inject, onMounted } from 'vue';
 import { useToast } from 'vue-toastification';
 import { supabase } from '@/lib/supabase';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const imageFile = ref(null);
 const imagePreview = ref(null);
@@ -73,18 +76,17 @@ const handleSubmit = async () => {
     };
 
     // Show success message and redirect to home page
-    toast.success('Item Added Successfully');
+    toast.success(t("toast.addjob.success"));
     router.push(`/items/${data.id}`);
-
   } catch (error) {
     console.error('Error fetching item', error);
-    toast.error('Item Was Not Added');
+    toast.error(t("toast.addjob.error"));
   }
 };
 
 onMounted(() => {
   if (!auth.user) {
-    toast.error('Please log in to add an item');
+    toast.error(t("toast.addjob.please"));
     router.push('/login');
   };
 });

@@ -1,6 +1,10 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import Card from '@/components/Card.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
 </script>
 
 <template>
@@ -9,26 +13,26 @@ import Card from '@/components/Card.vue';
     <div class="container-xl lg:container m-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
         <Card bg="bg-white">
-          <h2 class="text-2xl font-poppins">Search Items</h2>
+          <h2 class="text-2xl font-poppins">{{$t("homecards.title")}}</h2>
           <p class="mt-2 mb-4">
-            Search for all lost belongings reported found
+            {{$t("homecards.subtitle")}}
           </p>
           <RouterLink
             to="/items"
             class="inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-stone-600 font-uniongothic">
-            Search Items
+            {{$t("homecards.title")}}
           </RouterLink>
         </Card>
         <Card bg="bg-purple-100">
-          <h2 class="text-2xl font-poppins">Report Item</h2>
+          <h2 class="text-2xl font-poppins">{{$t("homecards.title2")}}</h2>
           <p class="mt-2 mb-4 font-inter">
-            Report a found item through a submission form
+            {{$t("homecards.subtitle2")}}
           </p>
           <RouterLink
             to="/items/add"
             class="inline-block bg-purple-500 text-white rounded-lg px-4 py-2 hover:bg-purple-600"
           >
-            Report Item
+            {{$t("homecards.title2")}}
           </RouterLink>
         </Card>
       </div>

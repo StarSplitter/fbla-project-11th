@@ -80,7 +80,7 @@ const isActiveLink = (routePath) => {
                     locale === 'en' ? 'bg-[#702632]' : 'hover:bg-gray-900',
                     'text-white', 'px-2', 'py-1', 'rounded-md', 'text-sm', 'font-sans'
                   ]">
-                  EN
+                  🇺🇸
                 </button>
                 <button
                   @click="locale = 'es'"
@@ -88,7 +88,7 @@ const isActiveLink = (routePath) => {
                     locale === 'es' ? 'bg-[#702632]' : 'hover:bg-gray-900',
                     'text-white', 'px-2', 'py-1', 'rounded-md', 'text-sm', 'font-sans'
                   ]">
-                  ES
+                  🇲🇽
                 </button>
               </div>
             </div>

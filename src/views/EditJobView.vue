@@ -4,6 +4,9 @@ import { reactive, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useToast } from 'vue-toastification';
 import { supabase } from '@/lib/supabase';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const route = useRoute();
 const toast = useToast();
@@ -40,11 +43,11 @@ const handleSubmit = async () => {
       throw error;
     } 
 
-    toast.success('Item Updated Successfully');
+    toast.success(t("toast.editjob.success"));
     router.push(`/items/${jobId}`);
   } catch (error) {
     console.error('Error fetching item', error);
-    toast.error('Item Was Not Updated');
+    toast.error(t("toast.editjob.error"));
   }
 };
 

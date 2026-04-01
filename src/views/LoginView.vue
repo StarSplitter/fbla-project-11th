@@ -3,6 +3,9 @@ import router from '@/router';
 import { ref } from 'vue';
 import { supabase } from '@/lib/supabase';
 import { useToast } from 'vue-toastification';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const loginEmail = ref('');
 const loginPassword = ref('');
@@ -18,16 +21,16 @@ const handleLogin = async () => {
 
     if (error) {
       console.error('Login error:', error);
-      toast.error('Invalid email or password');
+      toast.error(t("toast.account.loginerror"));
       return;
     };
 
-    toast.success('Successfully Logged In!');
+    toast.success(t("toast.account.login"));
     router.push('/');
     
   } catch (error) {
     console.error('Error Logging In', error);
-    toast.error('Error Logging In');
+    toast.error(t("toast.account.logincatch"));
   };
 };
 
@@ -38,11 +41,11 @@ const handleLogin = async () => {
     <div class="container m-auto max-w-2xl py-24">
       <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
         <form @submit.prevent="handleLogin">
-          <h2 class="text-3xl text-center font-semibold mb-6">Log In</h2>
+          <h2 class="text-3xl text-center font-semibold mb-6">{{ $t("signup.login") }}</h2>
 
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2">
-              Email Address
+              {{ $t("signup.email") }}
             </label>
             <input
               type="email"
@@ -50,14 +53,13 @@ const handleLogin = async () => {
               id="email"
               name="email"
               class="border rounded w-full py-2 px-3 mb-2"
-              placeholder="Email"
               required
             />
           </div>
           
           <div class="mb-4">
             <label for="password" class="block text-gray-700 font-bold mb-2">
-              Password
+              {{ $t("signup.password") }}
             </label>
             <input
               type="password"
@@ -65,7 +67,6 @@ const handleLogin = async () => {
               id="password"
               name="password"
               class="border rounded w-full py-2 px-3"
-              placeholder="Password"
             />
           </div>
 
@@ -74,7 +75,7 @@ const handleLogin = async () => {
               class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Log In
+              {{ $t("signup.login") }}
             </button>
           </div>
         </form>

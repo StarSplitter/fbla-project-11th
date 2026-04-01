@@ -6,6 +6,9 @@ import { reactive, defineProps, onMounted, onUnmounted, watch, ref } from 'vue';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import { supabase } from '@/lib/supabase';
 import { useQuery } from '@tanstack/vue-query';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 defineProps({
   limit: Number,
@@ -101,7 +104,7 @@ onMounted(() => {
   <section class="bg-stone-100 px-4 py-10">
     <div class="container-xl lg:container m-auto">
       <h2 class="text-4xl font-caudex font-bold text-stone-800 mb-6 text-center">
-        Browse Items
+        {{$t("joblistings.browse")}}
       </h2>
       <div v-if="(state.isLoading)" class="text-center text-gray-500 py-6">
         <PulseLoader />
@@ -120,7 +123,7 @@ onMounted(() => {
     <RouterLink
       to="/items"
       class="block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700">
-      View All Items
+      {{$t("joblistings.view")}}
       </RouterLink>
   </section>
   </div>

@@ -1,11 +1,83 @@
 {
   "hero": {
-    "title": "Encuentra rápidamente los objetos perdidos",
-    "subtitle": "Notifica y reclama objetos perdidos en Palisade con PaliFound"
+    "title": "Encuentra los artículos perdidos",
+    "subtitle": "Notifica y reclama artículos perdidos en Palisade con PaliFound"
   },
   "nav": {
     "home": "Inicio",
     "items": "Artículos",
     "addItem": "Agregar Artículo"
+  },
+  "homecards": {
+    "title": "Buscar artículos",
+    "subtitle": "Buscar todos los artículos perdidos que se han encontrado",
+    "title2": "Notificar un artículo",
+    "subtitle2": "Notificar un artículo encontrado a través del formulario de envío"
+  },
+  "statusbar": {
+    "logout": "Cerrar sesión",
+    "logged": "✓ Has iniciado sesión como: ",
+    "login": "Iniciar sesión",
+    "signup": "Registrarse",
+    "notlogged": "⚠ No ha iniciado sesión"
+  },
+  "joblistings": {
+    "browse": "Explorar artículos",
+    "view": "Ver todos los artículos"
+  },
+  "backbutton":{
+    "back": "Volver al listado de artículos"
+  },
+  "joblisting": {
+    "readmore": "Leer más"
+  },
+  "signup":{
+    "signup": "Registrarse",
+    "email": "Dirección de correo electrónico",
+    "login": "Iniciar sesión",
+    "password": "Contraseña"
+  },
+  "inquiry": {
+    "name": "Nombre",
+    "message": "Mensaje",
+    "sendform": "Enviar formulario"
+  },
+  "jobinfo": {
+    "jobinfo": "Información del autor",
+    "email": "Correo electrónico del autor:",
+    "phone": "Teléfono del autor:",
+    "manageitem": "Gestionar elemento",
+    "edititem": "Editar elemento",
+    "deleteitem": "Eliminar elemento"
+  },
+  "toast":{
+    "form":{
+      "success": "El formulario se ha enviado correctamente",
+      "error": "Error al enviar el formulario"
+    },
+    "account":{
+      "signup": "¡Registro completado con éxito!",
+      "signuperror": "Error al registrarse",
+      "login": "¡Inicio de sesión completado con éxito!",
+      "loginerror": "Correo electrónico o contraseña incorrectos",
+      "logincatch": "Error al iniciar sesión"
+    },
+    "addjob":{
+      "success": "Elemento añadido correctamente",
+      "error": "Error al recuperar el elemento",
+      "please": "Inicia sesión para añadir un elemento"
+    },
+    "editjob":{
+      "success": "Elemento actualizado correctamente",
+      "error": "Error al recuperar el elemento"
+    },
+    "deletejob":{
+      "success": "Elemento eliminado correctamente",
+      "error": "Error al recuperar el elemento"
+    },
+    "logout":{
+      "success": "Cierre de sesión completado",
+      "error": "Error al cerrar sesión"
+    }
   }
 }

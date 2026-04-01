@@ -1,6 +1,9 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { defineProps, ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const props = defineProps({
   job: Object
@@ -26,7 +29,7 @@ const props = defineProps({
           :to="'/items/' + job.id"
           class="h-[36px] bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg text-center text-sm"
         >
-          Read More
+          {{ $t("joblisting.readmore")}}
         </RouterLink>
       </div>
     </div>

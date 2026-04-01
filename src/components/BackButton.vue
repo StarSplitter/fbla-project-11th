@@ -1,5 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -9,7 +12,7 @@ import { RouterLink } from 'vue-router';
         to="/items"
         class="text-green-500 hover:text-green-600 flex items-center"
       >
-        <i class="pi pi-arrow-circle-left mr-3"></i> Back to Item Listings
+        <i class="pi pi-arrow-circle-left mr-3"></i> {{ $t("backbutton.back") }}
       </RouterLink>
     </div>
   </section>

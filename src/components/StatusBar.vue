@@ -4,6 +4,9 @@ import { inject } from 'vue';
 import { supabase } from '@/lib/supabase';
 import { RouterLink, useRoute } from 'vue-router';
 import { useToast } from 'vue-toastification';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const toast = useToast();
 
@@ -20,13 +23,13 @@ const handleLogOut = async () => {
 
     if (error) throw error;
     
-    toast.success('Succesfully Logged Out');
+    toast.success(t("toast.logout.success"));
     router.push('/');
 
   } catch (error) {
 
     console.error('Error Logging Out', error);
-    toast.error('Error Logging Out');
+    toast.error(t("toast.logout.error"));
 
   }
 };
@@ -37,7 +40,7 @@ const handleLogOut = async () => {
   <div v-if="auth.user" class="bg-green-100 border-b border-green-200 px-4 py-2">
     <div class="container mx-auto flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <span class="text-green-800 font-semibold">✓ Logged in as:</span>
+        <span class="text-green-800 font-semibold">{{$t('statusbar.logged')}}</span>
         <span class="text-green-900">{{ auth.user.email }}</span>
         <span v-if="auth.isAdmin" class="bg-green-600 text-white text-xs px-2 py-1 rounded">
           ADMIN
@@ -47,14 +50,14 @@ const handleLogOut = async () => {
             class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
             type="submit" @click="handleLogOut"
         >
-            Log Out
+            {{$t('statusbar.logout')}}
         </button>
     </div>
   </div>
   
   <div v-else class="bg-yellow-100 border-b border-yellow-200 px-4 py-2">
     <div class="container mx-auto flex items-center justify-between">
-      <span class="text-yellow-800 font-semibold">⚠ Not logged in</span>
+      <span class="text-yellow-800 font-semibold">{{$t('statusbar.notlogged')}}</span>
       <div class="flex gap-3">
         <RouterLink
             to="/signup"
@@ -69,7 +72,7 @@ const handleLogOut = async () => {
                 'rounded-md',
                 'font-sans',
             ]">
-            Sign Up
+            {{$t('statusbar.signup')}}
         </RouterLink>
         <RouterLink
                 to="/login"
@@ -84,7 +87,7 @@ const handleLogOut = async () => {
                   'rounded-md',
                   'font-sans',
                 ]">
-                Log In
+                {{$t('statusbar.login')}}
         </RouterLink>
       </div>
     </div>

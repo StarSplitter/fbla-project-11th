@@ -6,6 +6,9 @@ import { reactive, onMounted, computed, inject } from 'vue';
 import { useRoute, RouterLink, useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
 import { supabase } from '@/lib/supabase';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const route = useRoute();
 const router = useRouter();
@@ -36,13 +39,13 @@ const deleteJob = async () => {
     const confirm = window.confirm('Are you sure you want to delete this item?');
     if (confirm) {
       const {error} = await supabase.from('items').delete().eq('id', jobId);
-      toast.success('Item Deleted Successfully');
+      toast.success(t("toast.deletejob.success"));
       router.push('/items');
       if (error) throw error;
     }
   } catch (error) {
     console.error('Error deleting job', error);
-    toast.error('Job Not Deleted');
+    toast.error(t("toast.deletejob.error"));
   }
 };
 
@@ -77,19 +80,19 @@ onMounted(async () => {
         <aside>
           <!-- Company Info -->
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-bold mb-6">Finder Info</h3>
+            <h3 class="text-xl font-bold mb-6">{{ $t("jobinfo.jobinfo") }}</h3>
 
             <h2 class="text-2xl">{{ state.job.finder_name }}</h2>
 
             <hr class="my-4" />
 
-            <h3 class="text-xl">Finder's Email:</h3>
+            <h3 class="text-xl">{{ $t("jobinfo.email") }}</h3>
 
             <p class="my-2 bg-green-100 p-2 font-bold">
               {{ state.job.contact_email }}
             </p>
 
-            <h3 class="text-xl">Finder's Phone:</h3>
+            <h3 class="text-xl">{{ $t("jobinfo.phone") }}</h3>
 
             <p class="my-2 bg-green-100 p-2 font-bold">
               {{ state.job.contact_phone }}
@@ -97,17 +100,17 @@ onMounted(async () => {
           </div>
 
           <div v-if="canManageItem" class="bg-white p-6 rounded-lg shadow-md mt-6">
-            <h3 class="text-xl font-bold mb-6">Manage Item</h3>
+            <h3 class="text-xl font-bold mb-6">{{ $t("jobinfo.manageitem") }}</h3>
             <RouterLink
               :to="`/items/edit/${state.job.id}`"
               class="bg-green-500 hover:bg-green-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
-              >Edit Item</RouterLink
+              >{{ $t("jobinfo.edititem") }}</RouterLink
             >
             <button
               @click="deleteJob"
               class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
             >
-              Delete Item
+              {{ $t("jobinfo.deleteitem") }}
             </button>
           </div>
         </aside>
