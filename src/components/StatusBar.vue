@@ -47,7 +47,7 @@ const handleLogOut = async () => {
         </span>
       </div>
         <button
-            class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+            class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
             type="submit" @click="handleLogOut"
         >
             {{$t('statusbar.logout')}}
