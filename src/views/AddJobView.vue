@@ -103,7 +103,7 @@ onMounted(() => {
     <div class="container m-auto max-w-2xl py-24">
       <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
         <form @submit.prevent="handleSubmit">
-          <h2 class="text-3xl text-center font-semibold mb-6">Report Item</h2>
+          <h2 class="text-3xl text-center font-semibold mb-6">{{$t("addjob.additem")}}</h2>
 
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2">
@@ -115,7 +115,8 @@ onMounted(() => {
               id="name"
               name="name"
               class="border rounded w-full py-2 px-3 mb-2"
-              
+              :placeholder="$t('jobinfo.name')"
+              :aria-label="$t('jobinfo.name')"
               required
             />
           </div>
@@ -149,6 +150,7 @@ onMounted(() => {
               name="company"
               class="border rounded w-full py-2 px-3"
               :placeholder="$t('jobinfo.findername')"
+              :aria-label="$t('jobinfo.findername')"
             />
           </div>
 
@@ -165,6 +167,7 @@ onMounted(() => {
               name="contact_email"
               class="border rounded w-full py-2 px-3"
               :placeholder="$t('addjob.email')"
+              :aria-label="$t('addjob.email')"
               required
             />
           </div>
@@ -181,6 +184,7 @@ onMounted(() => {
               name="contact_phone"
               class="border rounded w-full py-2 px-3"
               :placeholder="$t('addjob.phone')"
+              :aria-label="$t('addjob.phone')"
             />
           </div>
 
@@ -190,7 +194,7 @@ onMounted(() => {
               type="submit"
               :disabled="isSubmitting"
             >
-              {{ isSubmitting ? 'Submitting...' : 'Add Item' }}
+              {{ isSubmitting ? 'Submitting...' : $t("addjob.additem") }}
             </button>
           </div>
         </form>

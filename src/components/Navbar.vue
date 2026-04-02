@@ -21,7 +21,7 @@ const isActiveLink = (routePath) => {
         >
           <!-- Logo -->
           <RouterLink class="flex flex-shrink-0 items-center mr-4" to="/">
-            <img class="h-14 w-auto" :src="logo" alt="PaliFind" />
+            <img class="h-14 w-auto" :src="logo" alt="PaliFound" />
             <span class="hidden md:block text-white text-2xl font-caudexbold ml-2">
               PALIFOUND
             </span>

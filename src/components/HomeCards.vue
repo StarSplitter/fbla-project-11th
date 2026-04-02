@@ -23,14 +23,14 @@ const { t } = useI18n();
             {{$t("homecards.title")}}
           </RouterLink>
         </Card>
-        <Card bg="bg-purple-100">
+        <Card bg="bg-red-50">
           <h2 class="text-2xl font-poppins">{{$t("homecards.title2")}}</h2>
           <p class="mt-2 mb-4 font-inter">
             {{$t("homecards.subtitle2")}}
           </p>
           <RouterLink
             to="/items/add"
-            class="inline-block bg-purple-500 text-white rounded-lg px-4 py-2 hover:bg-purple-600"
+            class="inline-block bg-red-800 text-white rounded-lg px-4 py-2 hover:bg-red-900"
           >
             {{$t("homecards.title2")}}
           </RouterLink>

@@ -27,7 +27,7 @@ const props = defineProps({
         </div>
         <RouterLink
           :to="'/items/' + job.id"
-          class="h-[36px] bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg text-center text-sm"
+          class="h-[36px] bg-red-800 hover:bg-red-900 text-white px-4 py-2 rounded-lg text-center text-sm"
         >
           {{ $t("joblisting.readmore")}}
         </RouterLink>
