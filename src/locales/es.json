@@ -46,9 +46,18 @@
     "jobinfo": "Información del autor",
     "email": "Correo electrónico del autor:",
     "phone": "Teléfono del autor:",
+    "findername": "Nombre del autor",
     "manageitem": "Gestionar elemento",
     "edititem": "Editar elemento",
-    "deleteitem": "Eliminar elemento"
+    "deleteitem": "Eliminar elemento",
+    "name": "Nombre del articulo"
+  },
+  "addjob":{
+    "jobinfo": "Información del autor",
+    "email": "Correo electrónico del autor",
+    "phone": "Teléfono del autor",
+    "image": "Imagen del articulo",
+    "additem": "Agregar Artículo"
   },
   "toast":{
     "form":{

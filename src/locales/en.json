@@ -46,9 +46,18 @@
     "jobinfo": "Finder Info",
     "email": "Finder's Email:",
     "phone": "Finder's Phone:",
+    "findername": "Finder's Name",
     "manageitem": "Manage Item",
     "edititem": "Edit Item",
-    "deleteitem": "Delete Item"
+    "deleteitem": "Delete Item",
+    "name": "Item Name"
+  },
+  "addjob":{
+    "jobinfo": "Finder Info",
+    "email": "Finder's Email",
+    "phone": "Finder's Phone:",
+    "image": "Item Image",
+    "additem": "Add Item"
   },
   "toast":{
     "form":{

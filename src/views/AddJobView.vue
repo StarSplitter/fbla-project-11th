@@ -10,6 +10,7 @@ const { t } = useI18n();
 
 const imageFile = ref(null);
 const imagePreview = ref(null);
+const isSubmitting = ref(false);
 
 const auth = inject('auth');
 
@@ -42,6 +43,10 @@ const handleImage = (e) => {
   Uploads image to storage and creates item in database
 */
 const handleSubmit = async () => {
+
+  if (isSubmitting.value) return;
+  isSubmitting.value = true;
+
   try {
     
     // Uploads image to storage and checks for an upload error
@@ -81,6 +86,7 @@ const handleSubmit = async () => {
   } catch (error) {
     console.error('Error fetching item', error);
     toast.error(t("toast.addjob.error"));
+    isSubmitting.value = false;
   }
 };
 
@@ -101,7 +107,7 @@ onMounted(() => {
 
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2">
-              Item Name
+              {{ $t("jobinfo.name") }}
             </label>
             <input
               type="text"
@@ -109,14 +115,14 @@ onMounted(() => {
               id="name"
               name="name"
               class="border rounded w-full py-2 px-3 mb-2"
-              placeholder="eg. Black Adidas Metal Waterbottle"
+              
               required
             />
           </div>
 
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2">
-              Item Image
+              {{ $t("addjob.image") }}
             </label>
             <input
               type="file"
@@ -130,11 +136,11 @@ onMounted(() => {
              <img v-if="imagePreview" :src="imagePreview" width="200" />
           </div>
 
-          <h3 class="text-2xl mb-5">Finder Info</h3>
+          <h3 class="text-2xl mb-5">{{ $t("addjob.jobinfo") }}</h3>
 
           <div class="mb-4">
             <label for="company" class="block text-gray-700 font-bold mb-2">
-              Finder's Name
+              {{ $t("jobinfo.findername")}}
             </label>
             <input
               type="text"
@@ -142,7 +148,7 @@ onMounted(() => {
               id="company"
               name="company"
               class="border rounded w-full py-2 px-3"
-              placeholder="Your Name"
+              :placeholder="$t('jobinfo.findername')"
             />
           </div>
 
@@ -150,7 +156,7 @@ onMounted(() => {
             <label
               for="contact_email"
               class="block text-gray-700 font-bold mb-2"
-              >Finder's Email</label
+              >{{ $t("addjob.email") }}</label
             >
             <input
               type="email"
@@ -158,7 +164,7 @@ onMounted(() => {
               id="contact_email"
               name="contact_email"
               class="border rounded w-full py-2 px-3"
-              placeholder="Your Email address"
+              :placeholder="$t('addjob.email')"
               required
             />
           </div>
@@ -166,7 +172,7 @@ onMounted(() => {
             <label
               for="contact_phone"
               class="block text-gray-700 font-bold mb-2"
-              >Finder's Phone</label
+              >{{ $t("addjob.phone") }}</label
             >
             <input
               type="tel"
@@ -174,7 +180,7 @@ onMounted(() => {
               id="contact_phone"
               name="contact_phone"
               class="border rounded w-full py-2 px-3"
-              placeholder="Your Phone Number"
+              :placeholder="$t('addjob.phone')"
             />
           </div>
 
@@ -182,8 +188,9 @@ onMounted(() => {
             <button
               class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
               type="submit"
+              :disabled="isSubmitting"
             >
-              Add Item
+              {{ isSubmitting ? 'Submitting...' : 'Add Item' }}
             </button>
           </div>
         </form>
